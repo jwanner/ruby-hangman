@@ -1,4 +1,3 @@
-require 'goto'
 prompt = "> "
 
 letters = ['a','b','c','d','e','f','g','h','i','i','j','k','l',
