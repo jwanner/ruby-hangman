@@ -15,7 +15,7 @@ while true
 		puts "correct"		
 		break
 	end		
-	puts "You can only geuss 1 letter at a time, try again"
+	puts "You can only geuss 1 letter at a time, try again \n> "
 end
 
 
