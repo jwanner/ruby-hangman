@@ -8,7 +8,9 @@ puts "What is your word?", prompt
 secret_word = $stdin.gets.chomp
 
 geuss_letter ="Geuss a letter"
+fail_counter = 0
 
+# ensure user only geusses one letter at a time
 puts geuss_letter, prompt	
 while true
 	if gets.chomp.length == 1
@@ -16,9 +18,14 @@ while true
 		break
 	end		
 	puts "You can only geuss 1 letter at a time, try again \n> "
+	fail_counter += 1
+	if fail_counter > 3  #prevent infinite loop
+		puts "You die for not following instructions"
+		exit
+	end
 end
 
-
+ 
 
 
 
