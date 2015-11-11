@@ -1,5 +1,5 @@
 require 'random_word_generator'
-prompt = "> "
+$prompt = "> "
 
 $letters = ['a','b','c','d','e','f','g','h','i','i','j','k','l',
 	'm','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -7,8 +7,8 @@ $letters = ['a','b','c','d','e','f','g','h','i','i','j','k','l',
 
 $secret_word = RandomWordGenerator.word
 $empty = " _ "
-def score(word)
-	number = word.length
+def score
+	number = $secret_word.length
 		for i in 1..number
 			print $empty
 		end			
@@ -16,15 +16,32 @@ def score(word)
 		puts "Available letters: #{$letters}"
 end
 
-geuss_letter ="Geuss a letter"	
+$geuss_letter ="Geuss a letter"	
 
 $score = 0
 $limb_score = 6
-puts geuss_letter, prompt
 $fail_counter = 0
+
+
+	def limbs(geuss)
+		if $secret_word.count(geuss) >= 1
+			puts "Correct! #{geuss} is in this word 
+			#{$secret_word.count(geuss)} times"
+			$score += $secret_word.count(geuss)
+		else
+			puts "Nope! You loose a limb"
+			$limb_score -= 1
+			$letters.delete(geuss)
+		end
+	end
+
+
 
 def game	
 	while true
+		puts $geuss_letter
+		puts score
+		$prompt
 		letter_geuss = $stdin.gets.chomp
 		if letter_geuss.length == 1
 			$valid_geuss = letter_geuss
@@ -38,33 +55,23 @@ def game
 			exit
 		end
 	end
+	puts limbs($valid_geuss)
 end
 
-	def limbs(geuss)
-		if $secret_word.count(geuss) >= 1
-			puts "Correct! #{geuss} is in this word 
-			#{$secret_word.count(geuss)} times"
-			$score += $secret_word.count(geuss)
-		else
-			puts "Nope! You loose a limb"
-			$limb_score -= 1
-		end
-	end
 
 			while true
 				$score < $secret_word.length && $limb_score > 0
 				puts game
 				if $score == $secret_word.length
-					puts "Congrats!!! You win!"
+					puts "Congrats!!! You win! the word was #{$secret_word}"
 			        exit
 			    end
 			    if $limb_score == 0
-			    	puts "You're dead!!!"
+			    	puts "You're dead!!! The word was #{$secret_word}"
 			    	exit
 			    end
 			end
 		
-
 
 # ideas for keeping track of number of limbs remaining, 
 # using an incremting += and check each time if it is 
