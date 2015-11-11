@@ -1,9 +1,8 @@
 require 'random_word_generator'
 $prompt = "> "
 
-$letters = ['a','b','c','d','e','f','g','h','i','i','j','k','l',
+$letters = ['a','b','c','d','e','f','g','h','i','j','k','l',
 	'm','n','o','p','q','r','s','t','u','v','w','x','y','z']
-
 
 $secret_word = RandomWordGenerator.word
 $empty = " _ "
@@ -17,11 +16,9 @@ def score
 end
 
 $geuss_letter ="Geuss a letter"	
-
 $score = 0
-$limb_score = 6
+$limb_score = 8
 $fail_counter = 0
-
 
 	def limbs(geuss)
 		if $secret_word.count(geuss) >= 1
@@ -34,9 +31,6 @@ $fail_counter = 0
 			$letters.delete(geuss)
 		end
 	end
-
-
-
 def game	
 	while true
 		puts $geuss_letter
@@ -57,23 +51,26 @@ def game
 	end
 	puts limbs($valid_geuss)
 end
-
-
-			while true
-				$score < $secret_word.length && $limb_score > 0
-				puts game
-				if $score == $secret_word.length
-					puts "Congrats!!! You win! the word was #{$secret_word}"
-			        exit
-			    end
-			    if $limb_score == 0
-			    	puts "You're dead!!! The word was #{$secret_word}"
-			    	exit
-			    end
-			end
+while true
+	$score < $secret_word.length && $limb_score > 0
+		puts game
+	if $score == $secret_word.length
+		puts "Congrats!!! You win! the word was #{$secret_word}"
+		exit
+	end
+	if $limb_score == 0
+		puts "You're dead!!! The word was #{$secret_word}"
+		exit
+	end
+end
 		
 
-# ideas for keeping track of number of limbs remaining, 
-# using an incremting += and check each time if it is 
-# less than x
 
+
+
+
+# current issues, game works.  
+# If same letter is geussed more than once
+# and is correct score is still incremented 
+# Letter bank is working, however blank spaces 
+# _ does not work
